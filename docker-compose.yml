@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  varabit-open-qr:
+    build: .
+    container_name: varabit-open-qr
+    ports:
+      - "3013:3000"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    labels:
+      - "com.varabit.app=varabit-open-qr"
+      - "com.varabit.description=Free QR Code Generator"
