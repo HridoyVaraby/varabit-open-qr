@@ -3,25 +3,121 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --black: #000000;
+  --white: #FFFFFF;
+  --gray-50: #FAFAFA;
+  --gray-100: #F5F5F5;
+  --gray-900: #0A0A0A;
+  --background: var(--white);
+  --foreground: var(--black);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--black);
+    --foreground: var(--white);
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@layer components {
+  /* Brutalist border system */
+  .brutalist-border {
+    border: 2px solid var(--black);
+  }
+
+  .dark .brutalist-border {
+    border-color: var(--white);
+  }
+
+  /* Hard shadow */
+  .brutalist-shadow {
+    box-shadow: 4px 4px 0 var(--black);
+  }
+
+  .dark .brutalist-shadow {
+    box-shadow: 4px 4px 0 var(--white);
+  }
+
+  /* Brutalist button base */
+  .brutalist-btn {
+    @apply brutalist-border brutalist-shadow transition-all duration-150;
+    border-radius: 0;
+  }
+
+  .brutalist-btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0 var(--black);
+  }
+
+  .dark .brutalist-btn:hover {
+    box-shadow: 5px 5px 0 var(--white);
+  }
+
+  .brutalist-btn:active {
+    transform: translate(0, 0);
+    box-shadow: none;
+  }
+
+  /* Brutalist input */
+  .brutalist-input {
+    @apply brutalist-border;
+    border-radius: 0;
+    outline: none;
+  }
+
+  .brutalist-input:focus {
+    box-shadow: 2px 2px 0 var(--black);
+  }
+
+  .dark .brutalist-input:focus {
+    box-shadow: 2px 2px 0 var(--white);
+  }
+
+  /* Skeleton loading shimmer */
+  .skeleton-shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--gray-100) 0%,
+      var(--gray-50) 50%,
+      var(--gray-100) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  .dark .skeleton-shimmer {
+    background: linear-gradient(
+      90deg,
+      #1a1a1a 0%,
+      #2a2a2a 50%,
+      #1a1a1a 100%
+    );
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* Mobile sticky bottom */
+  @media (max-width: 768px) {
+    .mobile-sticky-bottom {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+    }
   }
 }
